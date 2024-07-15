@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { ContactCard } from "../component/ContactCard";
+import Modal from "../component/Modal";
 
-export const Home = () => (
+export const Home = () => {
+	const [show, setShow] = useState({false})
+	return (
 	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
+		<ContactCard onDelete={() => setShow(true)} />
+		<Modal show={show} onClose{() => setShow(false)} />
 	</div>
-);
+	);
+}

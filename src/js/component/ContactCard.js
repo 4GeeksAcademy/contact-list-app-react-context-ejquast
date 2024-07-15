@@ -1,16 +1,11 @@
-import React from 'react';
-// import {withRouter} from 'react-router-dom';
+import React, { useState } from 'react';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router';
 
-class ContactCard extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            // initialize your state
-        };
-    }
-    
-    render(){
+export const ContactCard = (props) => {
+    const [contactCardState, setContactCardState] = useState(false)
+    const navigate = useNavigate()
         return (
             <li className="list-group-item">
                 <div className="row w-100">
@@ -36,8 +31,6 @@ class ContactCard extends React.Component{
                 </div>
             </li>
         );
-    }
-    
 }
 
 /**
@@ -56,4 +49,3 @@ ContactCard.propTypes = {
 ContactCard.defaultProps = {
   onDelete: null
 };
-export default withRouter(ContactCard);

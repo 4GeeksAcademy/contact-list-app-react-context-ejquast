@@ -6,14 +6,8 @@ import ContactCard from '../component/ContactCard';
 import Modal from '../component/Modal';
 import rigoImage from "../../img/rigo-baby.jpg";
 
-export default class Contacts extends Flux.View {
-    constructor(){
-        super();
-        this.state = {
-            showModal: false  
-        };
-    }
-    render() {
+export const Contacts = (props) => {
+    const[contactsState, setContactsState] = useState(false)
         return (
             <div className="container">
                 <div>
@@ -32,5 +26,4 @@ export default class Contacts extends Flux.View {
                 <Modal show={this.state.showModal} onClose={() => this.setState({showModal: false})} />
             </div>
         );
-    }
 }

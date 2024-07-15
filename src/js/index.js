@@ -8,11 +8,14 @@ import PropTypes from 'prop-types';
 import "../styles/index.css";
 
 //import your own components
-import Layout from './layout.js';
+//import Layout from './layout.js';
+import { Home } from './views/home.js';
 
-//
-const root = createRoot(document.querySelector("#app"));
+//const root = createRoot(document.querySelector("#app"));
 
 //render your react application
-root.render(<Layout/>);
-
+// root.render(<Layout/>);
+ReactDOM.render(
+    <Home />,
+    document.querySelector('#app')
+);
