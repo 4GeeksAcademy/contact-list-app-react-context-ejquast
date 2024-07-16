@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -48,4 +48,4 @@ Modal.defaultProps = {
   show: false,
   onClose: null
 };
-export default withRouter(Modal);
+export default Modal;

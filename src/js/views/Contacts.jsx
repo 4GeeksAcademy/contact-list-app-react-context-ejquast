@@ -2,11 +2,11 @@ import React from "react";
 // import Flux from "@4geeksacademy/react-flux-dash";
 import { Link } from "react-router-dom";
 
-import ContactCard from '../component/ContactCard';
+import {ContactCard} from '../component/ContactCard';
 import Modal from '../component/Modal';
 import rigoImage from "../../img/rigo-baby.jpg";
 
-export const Contacts = (props) => {
+export const Contacts = () => {
     const[contactsState, setContactsState] = useState(false)
         return (
             <div className="container">
