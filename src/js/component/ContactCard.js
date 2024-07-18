@@ -2,50 +2,43 @@ import React, { useState } from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const ContactCard = (props) => {
     const [contactCardState, setContactCardState] = useState(false)
     const navigate = useNavigate()
         return (
             <li className="list-group-item">
-                <div className="row w-100">
+                <div className="row w-50">
                     <div className="col-12 col-sm-6 col-md-3 px-0">
-                        <img src="http://demos.themes.guide/bodeo/assets/images/users/m101.jpg" alt="Mike Anamendolla" className="rounded-circle mx-auto d-block img-fluid" />
+                        <img src="https://picsum.photos/200" className="rounded-circle mx-auto d-block img-fluid" />
                     </div>
                     <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
                         <div className=" float-right">
                             <button className="btn" onClick={() => navigate('/edit')}><i className="fas fa-pencil-alt mr-3"></i></button>
                             <button className="btn" onClick={() => props.onDelete()}><i className="fas fa-trash-alt"></i></button>
                         </div>
-                        <label className="name lead">Mike Anamendolla</label>
+                        <label className="name lead">{name}</label>
                         <br /> 
                         <i className="fas fa-map-marker-alt text-muted mr-3"></i>
-                        <span className="text-muted">5842 Hillcrest Rd</span>
+                        <span className="text-muted">{address}</span>
                         <br />
                         <span className="fa fa-phone fa-fw text-muted mr-3" data-toggle="tooltip" title="" data-original-title="(870) 288-4149"></span>
-                        <span className="text-muted small">(870) 288-4149</span>
+                        <span className="text-muted small">{phone}</span>
                         <br />
                         <span className="fa fa-envelope fa-fw text-muted mr-3" data-toggle="tooltip" data-original-title="" title=""></span>
-                        <span className="text-muted small text-truncate">mike.ana@example.com</span>
+                        <span className="text-muted small text-truncate">{email}</span>
                     </div>
                 </div>
             </li>
         );
 }
 
-/**
- * here is where you define the data-types for
- * your component propersties
-**/
 ContactCard.propTypes = {
-    history: PropTypes.object,
-    onDelete: PropTypes.func,
-};
-
-/**
- * here is where you define the default values
- * for your component propersties
-**/
-ContactCard.defaultProps = {
-  onDelete: null
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
 };
