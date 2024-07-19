@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 // import Flux from "@4geeksacademy/react-flux-dash";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { useState } from "react";
 
 export const AddContact = () => {
+    const [inputValues, setInputValues] = useState({
+		nameInput: '',
+		emailInput: '',
+		phoneInput: '',
+		addressInput: ''
+	});
+    function createContact(e) {
+		e.preventDefault()
+		actions.createContacts(inputValues.nameInput, inputValues.emailInput, inputValues.phoneInput, inputValues.addressInput)
+		navigate("/")
+	}
+
     return (
         <div className="container">
             <div>

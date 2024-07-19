@@ -1,5 +1,5 @@
 import { json } from "react-router";
-import { CreateContact } from "../component/CreateContact";
+import { AddContact } from "../views/AddContact";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(data => setStore({contacts:data.contacts}))
 			},
 			
-			createContact: async(contact) => {
+			addContacts: async(contact) => {
 				 let option = {
 					method: "POST",
 					headers: {"Content-type": "application/json"},
