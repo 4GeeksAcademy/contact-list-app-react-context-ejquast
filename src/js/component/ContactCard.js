@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
-export const ContactCard = (props) => {
+export const ContactCard = ({ id, name, address, phone, email, onDeleteClick }) => {
     const [contactCardState, setContactCardState] = useState(false)
     const navigate = useNavigate()
         return (
@@ -15,19 +15,19 @@ export const ContactCard = (props) => {
                     </div>
                     <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
                         <div className=" float-right">
-                            <button className="btn" onClick={() => navigate('/edit')}><i className="fas fa-pencil-alt mr-3"></i></button>
-                            <button className="btn" onClick={() => props.onDelete()}><i className="fas fa-trash-alt"></i></button>
+                            <Link to={`/edit/${id}`} className="btn"><i className="fas fa-pencil-alt mr-3"></i></Link>
+                            <button className="btn" onClick={onDeleteClick}><i className="fas fa-trash-alt"></i></button>
                         </div>
-                        <label className="name lead">{props.name}</label>
+                        <label className="name lead">{name}</label>
                         <br /> 
                         <i className="fas fa-map-marker-alt text-muted mr-3"></i>
-                        <span className="text-muted">{props.address}</span>
+                        <span className="text-muted">{address}</span>
                         <br />
                         <span className="fa fa-phone fa-fw text-muted mr-3" data-toggle="tooltip" title="" data-original-title="(870) 288-4149"></span>
-                        <span className="text-muted small">{props.phone}</span>
+                        <span className="text-muted small">{phone}</span>
                         <br />
                         <span className="fa fa-envelope fa-fw text-muted mr-3" data-toggle="tooltip" data-original-title="" title=""></span>
-                        <span className="text-muted small text-truncate">{props.email}</span>
+                        <span className="text-muted small text-truncate">{email}</span>
                     </div>
                 </div>
             </li>

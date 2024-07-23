@@ -2,27 +2,24 @@ import React,{useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Modal = (props) => {
+const Modal = ({ show, onClose, onDelete }) => {
     const[modalState, setModalState] = useState(false)
     return (
-        <div className="modal" tabIndex="-1" role="dialog" style={{display: (props.show) ? 'inline-block' : 'none'}}>
+        <div className={`modal ${show ? 'd-block' : 'd-none'}`} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Are you sure?</h5>
-                        { (props.onClose) ?
-                            <button onClick={() => props.onClose()} type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            :''
-                        }
+                        <button onClick={onClose} type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div className="modal-body">
-                        <p>If you delete this thing the entire universe will go down!</p>
+                        <p>Delete conact?</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary">Oh no!</button>
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Yes baby!</button>
+                        <button type="button" className="btn btn-primary" onClick={onClose}>No!</button>
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={onDelete}>Yes!</button>
                     </div>
                 </div>
             </div>
@@ -35,17 +32,19 @@ const Modal = (props) => {
  * your component propersties
 **/
 Modal.propTypes = {
-    history: PropTypes.object,
-    onClose: PropTypes.func,
-    show: PropTypes.bool
+    show: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
 };
 
 /**
  * here is where you define the default values for
  * your component propersties
+ * style={{display: (props.show) ? 'inline-block' : 'none'}}
 **/
-Modal.defaultProps = {
-  show: false,
-  onClose: null
-};
+//Modal.defaultProps = {
+  //show: false,
+  //onClose: null
+//};
+
 export default Modal;

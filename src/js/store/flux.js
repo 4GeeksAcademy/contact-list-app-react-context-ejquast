@@ -28,8 +28,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}
 				catch(error) {console.log(error)}
-				
-			}
+			},
+            deleteContact: async (id) => {
+                try {
+                    const resp = await fetch(`https://playground.4geeks.com/contact/agendas/ejquast/contacts/${id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-type": "application/json"
+                        }
+                    });
+                    if (!resp.ok) {
+                        throw new Error(`error status: ${resp.status}`);
+                    }
+                    await getActions().getContacts();
+                } catch (error) {
+                    console.error("Error deleting contact:", error);
+                }
+            },
+            updateContact: async (id, updatedContact) => {
+                try {
+                    const resp = await fetch(`https://playground.4geeks.com/contact/agendas/ejquast/contacts/${id}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-type": "application/json"
+                        },
+                        body: JSON.stringify(updatedContact)
+                    });
+                    if (!resp.ok) {
+                        throw new Error(`Error status: ${resp.status}`);
+                    }
+                    await getActions().getContacts();
+                } catch (error) {
+                    console.error("Error updating contact:", error);
+                }
+            }
 
 		}
 	};
