@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 // import Flux from "@4geeksacademy/react-flux-dash";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useState } from "react";
 
 export const AddContact = () => {
+    const {store, actions} = useContext(Context)
+    const navigate = useNavigate()
     const [inputValues, setInputValues] = useState({
 		nameInput: '',
 		emailInput: '',
@@ -13,7 +15,11 @@ export const AddContact = () => {
 	});
     function createContact(e) {
 		e.preventDefault()
-		actions.createContacts(inputValues.nameInput, inputValues.emailInput, inputValues.phoneInput, inputValues.addressInput)
+		actions.addContacts({
+            name: inputValues.nameInput, 
+            email: inputValues.emailInput, 
+            phone: inputValues.phoneInput, 
+            address: inputValues.addressInput})
 		navigate("/")
 	}
 
@@ -24,7 +30,10 @@ export const AddContact = () => {
                 <form>
                     <div className="form-group">
                         <label>Full Name</label>
-                        <input type="text" className="form-control" placeholder="Full Name" />
+                        <input type="text" className="form-control" placeholder="Full Name" value={inputValues.nameInput} onChange={(event) => {setInputValues((prev) => ({
+                            ...prev,
+                            nameInput: event.target.value
+                        }))}} />
                     </div>
                     <div className="form-group">
                         <label>Email</label>
@@ -38,7 +47,7 @@ export const AddContact = () => {
                         <label>Address</label>
                         <input type="text" className="form-control" placeholder="Enter address" />
                     </div>
-                    <button type="button" className="btn btn-primary form-control">save</button>
+                    <button type="button" className="btn btn-primary form-control" onClick={createContact}>save</button>
                     <Link className="mt-3 w-100 text-center" to="/">or get back to contacts</Link>
                 </form>
             </div>
