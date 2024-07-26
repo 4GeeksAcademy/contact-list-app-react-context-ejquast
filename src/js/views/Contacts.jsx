@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import Flux from "@4geeksacademy/react-flux-dash";
 import { Link } from "react-router-dom";
 
 import { ContactCard } from '../component/ContactCard';
 import Modal from '../component/Modal';
-import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
 
 
 export const Contacts = () => {
     const { store, actions } = useContext(Context);
-    const [contactsState, setContactsState] = useState(false)
+    const [idToDelete, setIdToDelete] = useState();
 
     useEffect(() => {
         actions.getContacts();
@@ -27,9 +26,10 @@ export const Contacts = () => {
                     <ul className="list-unstyled">
                         {store.contacts.length > 0 ? (
                             store.contacts.map((contact) => (
-                                <li key={contact.id}>
-                                    <Link to={`/contact/${contact.id}`}>{contact.full_name}</Link>
-                                </li>
+                                <ContactCard key={contact.id} {...contact} onDelete={() => setIdToDelete(contact.id)} />
+                                // <li key={contact.id}>
+                                //     <Link to={`/edit/${contact.id}`}>{contact.name}</Link>
+                                // </li>
                             ))
                         ) : (
                             <p>No contacts available.</p>
@@ -37,7 +37,12 @@ export const Contacts = () => {
                     </ul>
                 </div>
             </div>
-            <Modal show={this.state.showModal} onClose={() => this.setState({ showModal: false })} />
+            <Modal 
+                show={idToDelete !== undefined} 
+                onClose={() => setIdToDelete(undefined)} 
+                onDelete={() => actions.deleteContact(idToDelete)
+                    .then(() => setIdToDelete(undefined))
+                } />
         </div>
     );
 }

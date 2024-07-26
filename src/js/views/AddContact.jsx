@@ -20,7 +20,7 @@ export const AddContact = () => {
             email: inputValues.emailInput, 
             phone: inputValues.phoneInput, 
             address: inputValues.addressInput})
-		navigate("/")
+		.then(() => navigate("/"));
 	}
 
     return (

@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const EditContact = () => {
     const { store, actions } = useContext(Context);
+    const params = useParams();
     const navigate = useNavigate();
     const [inputValues, setInputValues] = useState({
         nameInput: '',
@@ -15,13 +16,13 @@ export const EditContact = () => {
     // Function to handle form submission
     function adjustContact(e) {
         e.preventDefault(); // Prevent default form submission behavior
-        actions.updateContact({
+        actions.updateContact(params.id, {
             name: inputValues.nameInput,
             email: inputValues.emailInput,
             phone: inputValues.phoneInput,
             address: inputValues.addressInput
-        });
-        navigate("/"); // Navigate back to the contact list
+        })
+        .then(() => navigate("/")); // Navigate back to the contact list
     }
 
     // Function to handle input changes
@@ -32,7 +33,19 @@ export const EditContact = () => {
             [name]: value // Use computed property names to update state
         }));
     };
-
+    useEffect(() => {
+        if (inputValues.nameInput !== "") return;
+        const contact = store.contacts.find(
+            (_contact) => _contact.id == params.id
+        );
+        if (!contact) return;
+        setInputValues({
+            nameInput: contact.name,
+            emailInput: contact.email,
+            addressInput: contact.address,
+            phoneInput: contact.phone
+        });
+    }, [inputValues, store.contacts]);
     return (
         <div className="container">
             <div>

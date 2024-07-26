@@ -1,24 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {withRouter, useParams} from 'react-router-dom';
+import { withRouter, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
 
-export const ContactCard = ({id, name, address, phone, email }) => {
-    const [contactCardState, setContactCardState] = useState(false)
-    const navigate = useNavigate()
-    const { store, actions } = useContext(Context);
-
-
-    const deleteContact = () => {
-        actions.deleteContact(id);
-        navigate("/");
-      };
-
-        return (
-            <div className="d-flex">
+export const ContactCard = ({ id, name, address, phone, email, onDelete }) => {
+    return (
+        <div className="d-flex">
             <li className="list-group-item justify-contents-center mx-auto mb-3">
                 <div className="ContactCardSizing row">
                     <div className="col px-0">
@@ -27,10 +17,10 @@ export const ContactCard = ({id, name, address, phone, email }) => {
                     <div className="col justify-content-between">
                         <div className="float-right">
                             <Link to={`/edit/${id}`} className="btn"><i className="fas fa-pencil-alt mr-3"></i></Link>
-                            <button className="btn" onClick={() => deleteContact(id)}><i className="fas fa-trash-alt"></i></button>
+                            <button className="btn" onClick={onDelete}><i className="fas fa-trash-alt"></i></button>
                         </div>
                         <label className="name lead">{name}</label>
-                        <br /> 
+                        <br />
                         <i className="fas fa-map-marker-alt text-muted mr-3"></i>
                         <span className="text-muted">{address}</span>
                         <br />
@@ -42,8 +32,8 @@ export const ContactCard = ({id, name, address, phone, email }) => {
                     </div>
                 </div>
             </li>
-            </div>
-        );
+        </div>
+    );
 }
 
 // ContactCard.propTypes = {
