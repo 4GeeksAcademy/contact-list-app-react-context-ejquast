@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
-import {withRouter} from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import {withRouter, useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Context } from "../store/appContext";
 
-export const ContactCard = ({ id, name, address, phone, email, onDeleteClick }) => {
+
+export const ContactCard = ({id, name, address, phone, email }) => {
     const [contactCardState, setContactCardState] = useState(false)
     const navigate = useNavigate()
+    const { store, actions } = useContext(Context);
+
+
+    const deleteContact = () => {
+        actions.deleteContact(id);
+        navigate("/");
+      };
+
         return (
-            <li className="list-group-item">
-                <div className="row w-50">
-                    <div className="col-12 col-sm-6 col-md-3 px-0">
+            <div className="d-flex">
+            <li className="list-group-item justify-contents-center mx-auto mb-3">
+                <div className="ContactCardSizing row">
+                    <div className="col px-0">
                         <img src="https://picsum.photos/200" className="rounded-circle mx-auto d-block img-fluid" />
                     </div>
-                    <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-                        <div className=" float-right">
+                    <div className="col justify-content-between">
+                        <div className="float-right">
                             <Link to={`/edit/${id}`} className="btn"><i className="fas fa-pencil-alt mr-3"></i></Link>
-                            <button className="btn" onClick={onDeleteClick}><i className="fas fa-trash-alt"></i></button>
+                            <button className="btn" onClick={() => deleteContact(id)}><i className="fas fa-trash-alt"></i></button>
                         </div>
                         <label className="name lead">{name}</label>
                         <br /> 
@@ -31,14 +42,15 @@ export const ContactCard = ({ id, name, address, phone, email, onDeleteClick }) 
                     </div>
                 </div>
             </li>
+            </div>
         );
 }
 
-ContactCard.propTypes = {
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    onDeleteClick: PropTypes.func.isRequired,
-};
+// ContactCard.propTypes = {
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//     address: PropTypes.string.isRequired,
+//     phone: PropTypes.string.isRequired,
+//     email: PropTypes.string.isRequired,
+//     onDeleteClick: PropTypes.func.isRequired,
+// };

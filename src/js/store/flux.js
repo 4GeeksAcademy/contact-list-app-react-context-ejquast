@@ -3,9 +3,27 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts:undefined
+			contacts:[]
 		},
 		actions: {
+
+            // createUser = async () => {
+            //     let option = {
+			// 		method: "POST",
+			// 		headers: {"Content-type": "application/json"},
+			// 		body: JSON.stringify(contact)
+			// 	}
+			// 	try {
+			// 		let response = await fetch("https://playground.4geeks.com/contact/agendas/ejquast", option)
+			// 		if (!response.ok){
+			// 			return false						
+			// 		}else{
+			// 			getActions().getContacts() 
+			// 			return true
+			// 		}
+			// 	}
+			// 	catch(error) {console.log(error)}
+            //   },
 			getContacts: () => {
 				fetch("https://playground.4geeks.com/contact/agendas/ejquast/contacts")
 				.then(response => response.json())

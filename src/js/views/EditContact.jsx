@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useState } from "react";
 
-export const AddContact = () => {
+export const EditContact = () => {
     const {store, actions} = useContext(Context)
     const navigate = useNavigate()
     const [inputValues, setInputValues] = useState({
@@ -13,9 +13,9 @@ export const AddContact = () => {
 		phoneInput: '',
 		addressInput: ''
 	});
-    function createContact(e) {
+    function adjustContact(e) {
 		e.preventDefault()
-		actions.addContacts({
+		actions.editContacts({
             name: inputValues.nameInput, 
             email: inputValues.emailInput, 
             phone: inputValues.phoneInput, 
@@ -26,7 +26,7 @@ export const AddContact = () => {
     return (
         <div className="container">
             <div>
-                <h1 className="text-center mt-5">Add a new contact</h1>
+                <h1 className="text-center mt-5">Edit a contact</h1>
                 <form>
                     <div className="form-group">
                         <label>Full Name</label>
