@@ -9,7 +9,7 @@ import { Context } from "../store/appContext";
 export const ContactCard = ({ id, name, address, phone, email, onDelete }) => {
     return (
         <div className="d-flex">
-            <li className="list-group-item justify-contents-center mx-auto border p-4">
+            <li className="list-group-item justify-contents-center mx-auto border border-secondary-subtle p-4">
                 <div className="ContactCardSizing row">
                     <div className="col px-0">
                         <img src="https://picsum.photos/200" className="rounded-circle mx-auto d-block img-fluid" />
