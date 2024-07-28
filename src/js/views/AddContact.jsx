@@ -30,7 +30,7 @@ export const AddContact = () => {
                 <form>
                     <div className="form-group">
                         <label>Full Name</label>
-                        <input type="text" className="form-control" placeholder="Full Name"
+                        <input type="text" className="form-control mb-2" placeholder="Full Name"
                         value={inputValues.nameInput}
                         onChange={(event) => {
                             setInputValues((prev) => ({
@@ -40,7 +40,7 @@ export const AddContact = () => {
                     </div>
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="email" className="form-control" placeholder="Enter email"
+                        <input type="email" className="form-control mb-2" placeholder="Enter email"
                         value={inputValues.emailInput}
                         onChange={(event) => {
                             setInputValues((prev) => ({
@@ -50,7 +50,7 @@ export const AddContact = () => {
                     </div>
                     <div className="form-group">
                         <label>Phone</label>
-                        <input type="phone" className="form-control" placeholder="Enter phone"
+                        <input type="phone" className="form-control mb-2" placeholder="Enter phone"
                         value={inputValues.phoneInput}
                         onChange={(event) => {
                             setInputValues((prev) => ({
@@ -60,7 +60,7 @@ export const AddContact = () => {
                     </div>
                     <div className="form-group">
                         <label>Address</label>
-                        <input type="text" className="form-control" placeholder="Enter address"
+                        <input type="text" className="form-control mb-3" placeholder="Enter address"
                         value={inputValues.addressInput}
                         onChange={(event) => {
                             setInputValues((prev) => ({
@@ -68,8 +68,8 @@ export const AddContact = () => {
                                 addressInput: event.target.value
                             }))}} />
                     </div>
-                    <button type="button" className="btn btn-primary form-control" onClick={createContact}>save</button>
-                    <Link className="mt-3 w-100 text-center" to="/">Return to Contacts List</Link>
+                    <button type="button" className="btn btn-primary form-control mb-3" onClick={createContact}>save</button>
+                    <Link className="w-100 text-center" to="/">Return to Contacts List</Link>
                 </form>
             </div>
         </div>
